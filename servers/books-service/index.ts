@@ -43,8 +43,7 @@ const resolvers = {
     },
   },
   User: {
-    book: (...args) => {
-      console.log(args);
+    book: () => {
       return {
         id: 1,
         name: "Harry Potter",

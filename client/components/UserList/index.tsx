@@ -1,21 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-
-const GET_USERS = gql`
-  query GetBooks {
-    users {
-      id
-      name
-    }
-  }
-`;
-interface User {
-  id: number;
-  name: string;
-}
-
-interface UsersData {
-  users: User[];
-}
+import { GET_USERS } from "../../graphql/operations";
+import { User, UsersData } from "../../types";
 
 const UserItem = ({ user }: { user: User }) => {
   return (

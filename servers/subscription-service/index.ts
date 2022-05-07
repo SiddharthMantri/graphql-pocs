@@ -12,6 +12,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
+const BOOK_CREATED = "BOOK_CREATED";
 
 const typeDefs = gql`
   type Book {
@@ -34,19 +35,32 @@ const resolvers = {
   },
   Subscription: {
     bookCreated: {
-      subscribe: () => pubsub.asyncIterator(["BOOK_CREATED"]),
+      subscribe: () => pubsub.asyncIterator([BOOK_CREATED]),
     },
   },
 };
 
 const server = async () => {
   const app = express();
+  let currentNumber = 0;
 
   const httpServer = createServer(app);
 
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: "/graphql",
+  });
+
+  app.get("/createBook", (_, res) => {
+    currentNumber++;
+    const payload = {
+      id: currentNumber.toString(),
+      name: `Book-${currentNumber}`,
+    };
+    pubsub.publish(BOOK_CREATED, {
+      bookCreated: payload,
+    });
+    res.status(200).json(payload);
   });
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
@@ -94,14 +108,5 @@ const server = async () => {
 
   return httpServer;
 };
-
-let currentNumber = 0;
-function incrementNumber() {
-  currentNumber++;
-  pubsub.publish("BOOK_CREATED", { id: currentNumber });
-  setTimeout(incrementNumber, 1000);
-}
-// Start incrementing
-incrementNumber();
 
 export default server;

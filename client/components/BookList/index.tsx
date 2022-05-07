@@ -1,23 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
+import { GET_BOOKS } from "../../graphql/operations";
+import { Book, BooksData } from "../../types";
 
-const GET_BOOKS = gql`
-  query GetBooks {
-    books {
-      id
-      name
-    }
-  }
-`;
-interface Book {
-  id: number;
-  name: string;
-}
-
-interface BooksData {
-  books: Book[];
-}
-
-const BookItem = ({ book }: { book: Book }) => {
+export const BookItem = ({ book }: { book: Book }) => {
   return (
     <div>
       {book.id} - {book.name}
