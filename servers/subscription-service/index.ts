@@ -52,7 +52,7 @@ const server = async () => {
   });
 
   app.get("/createBook", (_, res) => {
-    currentNumber++;
+    currentNumber += 1;
     const payload = {
       id: currentNumber.toString(),
       name: `Book-${currentNumber}`,
@@ -64,6 +64,9 @@ const server = async () => {
   });
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+  // Unique case of having to disable eslint 👀
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const serverCleanup = useServer(
     {
       schema,
@@ -91,20 +94,6 @@ const server = async () => {
   await apolloServer.start();
 
   apolloServer.applyMiddleware({ app });
-
-  console.log(wsServer.address());
-  httpServer.listen(9100, () => {
-    console.log(
-      `🚀 Query endpoint ready at http://localhost:${9100}${
-        apolloServer.graphqlPath
-      }`
-    );
-    console.log(
-      `🚀 Subscription endpoint ready at ws://localhost:${9100}${
-        apolloServer.graphqlPath
-      }`
-    );
-  });
 
   return httpServer;
 };

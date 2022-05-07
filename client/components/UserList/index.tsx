@@ -1,14 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_USERS } from "../../graphql/operations";
 import { User, UsersData } from "../../types";
 
-const UserItem = ({ user }: { user: User }) => {
-  return (
-    <div>
-      {user.id} - {user.name}
-    </div>
-  );
-};
+const UserItem = ({ user }: { user: User }) => (
+  <div>
+    {user.id} - {user.name}
+  </div>
+);
 
 const UserList = (): JSX.Element => {
   const { data, loading } = useQuery<UsersData>(GET_USERS);

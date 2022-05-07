@@ -17,19 +17,17 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    users: () => {
-      return [
-        {
-          id: 1,
-          name: "Sid",
-        },
-        {
-          id: 2,
-          name: "Ana",
-        },
-      ];
-    },
-    user: (parent, args, context) => {
+    users: () => [
+      {
+        id: 1,
+        name: "Sid",
+      },
+      {
+        id: 2,
+        name: "Ana",
+      },
+    ],
+    user: (parent, args) => {
       const { userId } = args;
       if (userId) {
         return {
@@ -41,6 +39,7 @@ const resolvers = {
     },
   },
   User: {
+    // eslint-disable-next-line no-underscore-dangle
     __resolveReference() {
       return {
         id: 1,

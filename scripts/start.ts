@@ -1,7 +1,7 @@
-import { default as bookServer } from "../servers/books-service";
-import { default as userServer } from "../servers/user-service";
-import { default as gateway } from "../servers/gateway";
-import { default as subs } from "../servers/subscription-service";
+import bookServer from "../servers/books-service";
+import userServer from "../servers/user-service";
+import gateway from "../servers/gateway";
+import subscriptionService from "../servers/subscription-service";
 
 const start = async () => {
   const booksApp = await bookServer();
@@ -16,8 +16,9 @@ const start = async () => {
   gatewayApp.listen(9000);
   console.log("Started gateway");
 
-  const subscriptionApp = await subs();
-  console.log("started subs");
+  const subscriptionApp = await subscriptionService();
+  subscriptionApp.listen(9100);
+  console.log("started subscription service");
 };
 
 start();

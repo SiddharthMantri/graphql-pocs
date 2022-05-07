@@ -1,7 +1,7 @@
-import { ApolloServer, gql } from "apollo-server-express";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import express from "express";
 import { ApolloGateway } from "@apollo/gateway";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
 
 const server = async () => {
   const app = express();

@@ -27,6 +27,8 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "html-webpack-plugin": "^5.5.0",
@@ -58,6 +60,8 @@
     "start:users": "ts-node-dev ./user-service/index.ts",
     "start:gateway": "ts-node-dev ./gateway/index.ts",
     "start:server": "ts-node-dev ./scripts/start.ts",
-    "start:client": "webpack-dev-server --config ./config/webpack.config.js --open --mode development --hot"
+    "start:client": "webpack-dev-server --config ./config/webpack.config.js --open --mode development --hot",
+    "format": "prettier --write '*.json' '**/*.{js,ts,tsx,scss,json}'",
+    "lint": "eslint '**/*.{js,ts,tsx}' --max-warnings 20"
   }
 }

@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   mode: "development",
   entry: "./client/index.tsx",
@@ -8,7 +9,6 @@ module.exports = {
     path: path.join(__dirname, "./client/dist"),
     filename: "bundle.js",
   },
-  devtool: "inline-source-map",
   devServer: {
     static: "./client/dist",
     port: 3000,

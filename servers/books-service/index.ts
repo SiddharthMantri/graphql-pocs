@@ -20,22 +20,20 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    books: () => {
-      return [
-        {
-          id: 1,
-          name: "Harry Potter",
-        },
-        {
-          id: 2,
-          name: "Lord of the Rings",
-        },
-      ];
-    },
+    books: () => [
+      {
+        id: 1,
+        name: "Harry Potter",
+      },
+      {
+        id: 2,
+        name: "Lord of the Rings",
+      },
+    ],
   },
   Book: {
-    __resolveReference(book) {
-      console.log(book);
+    // eslint-disable-next-line no-underscore-dangle
+    __resolveReference() {
       return {
         id: 1,
         name: "Harry Potter",
@@ -43,12 +41,10 @@ const resolvers = {
     },
   },
   User: {
-    book: () => {
-      return {
-        id: 1,
-        name: "Harry Potter",
-      };
-    },
+    book: () => ({
+      id: 1,
+      name: "Harry Potter",
+    }),
   },
 };
 

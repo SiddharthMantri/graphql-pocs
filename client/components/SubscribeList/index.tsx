@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { BooksData } from "../../types";
 import { useEffect } from "react";
+import { BooksData } from "../../types";
 import { GET_BOOKS, SUBSCRIBE_BOOKS } from "../../graphql/operations";
 import { BookItem } from "../BookList";
 
