@@ -21,7 +21,7 @@ These services are queried through an Apollo Client instance in the React app ru
 # Install deps
 yarn
 
-# run the services
+# run the services in separate terminal windows
 
 yarn start:server # Runs scripts/start.ts
 yarn start:client # Starts the webpack dev server
@@ -30,5 +30,6 @@ yarn start:client # Starts the webpack dev server
 Your client app will be served on `http://localhost:3000`. If you then connect to `http://localhost:9100/createBook` in a new tab on your browser, a new pubsub event will be created which will publish data to the exposed subscription which in turn will trigger a re-render of the books on the browser.
 
 #### Notes
-- For the demo, I'm using the deprecated `serviceList` option to enable the gateway. 
+
+- For the demo, I'm using the deprecated `serviceList` option to enable the gateway.
 - The react code is suboptimal but it gets the job done.
