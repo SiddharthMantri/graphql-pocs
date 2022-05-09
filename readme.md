@@ -17,6 +17,8 @@ These services are queried through an Apollo Client instance in the React app ru
 
 #### Start
 
+Replicate the `.env.sample` into a `.env` file. 
+
 ```sh
 # Install deps
 yarn
