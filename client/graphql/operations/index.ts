@@ -10,7 +10,7 @@ export const GET_BOOKS = gql`
 `;
 
 export const GET_USERS = gql`
-  query GetBooks {
+  query GetUsers {
     users {
       id
       name
