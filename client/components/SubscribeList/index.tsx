@@ -15,8 +15,7 @@ const SubscribeList = () => {
           return previous;
         }
         return {
-          // @ts-ignore
-          books: [...previous.books, subscriptionData.data.bookCreated],
+          books: [...previous.books, ...subscriptionData.data.books],
         };
       },
     });

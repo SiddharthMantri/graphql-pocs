@@ -25,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    bookCreated: Book
+    books: [Book]
   }
 `;
 
@@ -34,7 +34,7 @@ const resolvers = {
     book: () => ({ id: 1, name: "Sid" }),
   },
   Subscription: {
-    bookCreated: {
+    books: {
       subscribe: () => pubsub.asyncIterator([BOOK_CREATED]),
     },
   },
@@ -58,7 +58,7 @@ const server = async () => {
       name: `Book-${currentNumber}`,
     };
     pubsub.publish(BOOK_CREATED, {
-      bookCreated: payload,
+      books: [payload],
     });
     res.status(200).json(payload);
   });

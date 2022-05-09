@@ -20,7 +20,7 @@ export const GET_USERS = gql`
 
 export const SUBSCRIBE_BOOKS = gql`
   subscription SubscribeBook {
-    bookCreated {
+    books {
       id
       name
     }
