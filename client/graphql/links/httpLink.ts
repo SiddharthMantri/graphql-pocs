@@ -1,7 +1,8 @@
 import { HttpLink } from "@apollo/client";
 
-const httpLink = new HttpLink({
-  uri: "http://localhost:9000/graphql",
-});
+const createHttpLink = ({ gatewayUrl }: { gatewayUrl: string }) =>
+  new HttpLink({
+    uri: gatewayUrl,
+  });
 
-export default httpLink;
+export default createHttpLink;

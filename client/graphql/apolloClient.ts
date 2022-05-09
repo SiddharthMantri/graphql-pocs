@@ -1,7 +1,13 @@
 import { ApolloClient, InMemoryCache, split } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
-import httpLink from "./links/httpLink";
-import wsLink from "./links/wsLink";
+import createHttpLink from "./links/httpLink";
+import createWsLink from "./links/wsLink";
+import config from "../config";
+
+const { wsUrl, gatewayUrl } = config;
+
+const wsLink = createWsLink({ wsUrl });
+const httpLink = createHttpLink({ gatewayUrl });
 
 const link = split(
   ({ query }) => {
