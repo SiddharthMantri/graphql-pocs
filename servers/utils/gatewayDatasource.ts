@@ -10,6 +10,7 @@ import {
   ResolveTree,
 } from "graphql-parse-resolve-info";
 import merge from "lodash/merge";
+import { onError } from "@apollo/client/link/error";
 
 class GatewayDatasource<TContext = any> extends DataSource {
   private gatewayURL;
@@ -34,12 +35,26 @@ class GatewayDatasource<TContext = any> extends DataSource {
   }
   composeLinks() {
     return from([
+      this.onErrorLink(),
       this.onRequestLink(),
       createHttpLink({
         fetch,
         uri: this.gatewayURL,
       }),
     ]);
+  }
+
+  onErrorLink() {
+    return onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors) {
+        graphQLErrors.map((graphqlError) =>
+          console.error(`[GraphQL error]: ${graphqlError.message}`)
+        );
+      }
+      if (networkError) {
+        console.log(`[Network Error]: ${networkError}`);
+      }
+    });
   }
 
   async query(query: DocumentNode, options?: GraphQLOptions) {
