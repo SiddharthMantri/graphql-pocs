@@ -34,7 +34,7 @@ const resolvers = {
     books: {
       subscribe: () => pubsub.asyncIterator([BOOK_CREATED]),
       resolve: (payload, args, { dataSources: { gatewayApi } }, info) =>
-        gatewayApi.fetchAndMergeNonPayloadPostData(
+        gatewayApi.fetchAndMergeNonPayloadBooksData(
           payload.books[0].id,
           payload,
           info

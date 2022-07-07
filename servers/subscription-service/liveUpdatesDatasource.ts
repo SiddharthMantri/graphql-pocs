@@ -5,7 +5,7 @@ class LiveUpdatesDatasource extends GatewayDatasource {
   constructor(gatewayUrl) {
     super(gatewayUrl);
   }
-  async fetchAndMergeNonPayloadPostData(bookId, payload, info) {
+  async fetchAndMergeNonPayloadBooksData(bookId, payload, info) {
     const selections = this.buildNonPayloadSelections(payload, info);
     const payloadData = Object.values(payload)[0];
     if (!selections) {
