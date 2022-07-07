@@ -7,7 +7,6 @@ import {
 import express from "express";
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import { PubSub } from "graphql-subscriptions";
 import { ApolloGateway } from "@apollo/gateway";
 import {
@@ -46,6 +45,12 @@ const resolvers = {
   Subscription: {
     books: {
       subscribe: () => pubsub.asyncIterator([BOOK_CREATED]),
+      resolve: (payload, args, { dataSources: { gatewayApi } }, info) =>
+        gatewayApi.fetchAndMergeNonPayloadPostData(
+          payload.books[0].id,
+          payload,
+          info
+        ),
     },
   },
 };
@@ -99,8 +104,6 @@ const server = async () => {
     res.status(200).json(payload);
   });
 
-  // const schema = makeExecutableSchema({ typeDefs, resolvers });
-
   // Unique case of having to disable eslint 👀
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const serverCleanup = useServer(
@@ -117,7 +120,7 @@ const server = async () => {
         });
 
         const dataSourceContext = {
-          dataSouces: {
+          dataSources: {
             gatewayApi: liveUpdatesDatasource,
           },
         };

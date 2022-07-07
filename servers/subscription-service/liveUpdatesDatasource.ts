@@ -8,24 +8,21 @@ class LiveUpdatesDatasource extends GatewayDatasource {
   async fetchAndMergeNonPayloadPostData(bookId, payload, info) {
     const selections = this.buildNonPayloadSelections(payload, info);
     const payloadData = Object.values(payload)[0];
-
     if (!selections) {
       return payloadData;
     }
 
     const getBookSubscription = gql`
-      query GET_BOOK($id: ID!) {
-        book(id: $id) {
+      query GET_BOOK{
+        books {
           ${selections}
         }
       }
     `;
 
     try {
-      const response = await this.query(getBookSubscription, {
-        // @ts-ignore
-        variables: { id: bookId },
-      });
+      const response = await this.query(getBookSubscription);
+
       return this.mergeFieldData(payloadData, response.data.post);
     } catch (error) {
       console.error(error);

@@ -39,7 +39,7 @@
         "extensions": [".js", ".tsx"]
       }
     ],
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "import/no-extraneous-dependencies": "off",
     "import/extensions": ["error", { "ts": "never", "tsx": "never" }],
     "react/require-default-props": "off",

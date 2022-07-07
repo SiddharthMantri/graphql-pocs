@@ -42,9 +42,13 @@ class GatewayDatasource<TContext = any> extends DataSource {
     ]);
   }
 
-  async query(query: DocumentNode, options: GraphQLOptions) {
+  async query(query: DocumentNode, options?: GraphQLOptions) {
     const link = this.composeLinks();
     try {
+      const operation = {
+        query,
+        ...(options && options),
+      };
       const response = await toPromise(execute(link, { query, ...options }));
       return response;
     } catch (error) {
