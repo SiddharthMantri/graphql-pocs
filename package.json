@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "14.19.1"
+    "node": "16.13.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
@@ -48,11 +48,15 @@
     "@apollo/federation": "^0.36.0",
     "@apollo/gateway": "^0.50.0",
     "@apollo/subgraph": "^0.4.0",
+    "apollo-datasource": "^3.3.2",
     "apollo-server-express": "^3.6.6",
+    "cross-fetch": "^3.1.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "graphql": "^16.4.0",
+    "graphql-parse-resolve-info": "^4.12.3",
     "graphql-subscriptions": "^2.0.0",
+    "graphql-tools": "^8.3.0",
     "graphql-ws": "^5.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
