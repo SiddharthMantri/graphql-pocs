@@ -24,24 +24,12 @@ const pubsub = new PubSub();
 const BOOK_CREATED = "BOOK_CREATED";
 
 const typeDefs = gql`
-  type Book {
-    id: ID!
-    name: String
-  }
-
-  type Query {
-    book: Book
-  }
-
   type Subscription {
     books: [Book]
   }
 `;
 
 const resolvers = {
-  Query: {
-    book: () => ({ id: 1, name: "Sid" }),
-  },
   Subscription: {
     books: {
       subscribe: () => pubsub.asyncIterator([BOOK_CREATED]),
